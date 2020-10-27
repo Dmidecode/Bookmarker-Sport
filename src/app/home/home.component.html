@@ -1,0 +1,59 @@
+<!-- <mat-horizontal-stepper [linear]="true" #stepper>
+  <ng-template matStepperIcon="edit">
+    <mat-icon>check</mat-icon>
+  </ng-template> -->
+
+<!-- PREMIERE ETAPE -->
+<!-- <mat-step label="Choose a region">
+    <button type="button" mat-raised-button color="warn" class="spacer-button" (click)="selectRegion('us', 'United States')"
+      matStepperNext>
+      United States
+    </button>
+    <button type="button" mat-raised-button color="warn" class="spacer-button" (click)="selectRegion('uk', 'United Kingdom')"
+      matStepperNext>
+      United Kingdom
+    </button>
+    <button type="button" mat-raised-button color="warn" (click)="selectRegion('au', 'Australia')" matStepperNext>
+      Australia
+    </button>
+  </mat-step> -->
+
+<!-- DEUXIEME ETAPE -->
+<!-- <mat-step label="Choose a group">
+    <div *ngIf="rechercheGroupActive; else listGroupSport">
+      <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="5" diameter="50" style="margin: 0 10px;">
+      </mat-progress-spinner>
+    </div>
+    <ng-template #listGroupSport>
+      <mat-action-list>
+        <button mat-raised-button color="primary" matStepperNext *ngFor="let group of groupSport | keyvalue: sortByKey"
+          class="spacer-button" (click)="selectGroup(group.key, group.value)">
+          {{ group.value }}
+        </button>
+      </mat-action-list>
+    </ng-template>
+    <div>
+      <button mat-icon-button matStepperPrevious>
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <button mat-icon-button (click)="stepper.reset()">
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>
+  </mat-step> -->
+
+<!-- TROISIEME ETAPE -->
+<!-- <mat-step label="Results"> -->
+<div *ngIf="rechercheResultatActive < regionLength">
+  <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="5" diameter="50"  class="center-spinner">
+  </mat-progress-spinner>
+</div>
+<div *ngIf="rechercheResultatActive == regionLength && resultats.length > 0">
+  <bm-football [data]="resultats"></bm-football>
+</div>
+<div *ngIf="rechercheResultatActive == regionLength && resultats.length == 0">
+  <p><b>NO SUREBET FOUND</b></p>
+</div>
+<!-- </mat-step>
+
+</mat-horizontal-stepper> -->

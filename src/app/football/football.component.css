@@ -1,0 +1,43 @@
+.full-width-table {
+  width: 100%;
+}
+
+.order-container {
+  overflow: auto;
+  height  : 800px;
+}
+
+mat-header-cell {
+  display        : flex;
+  justify-content: flex-end;
+}
+
+
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.input-width {
+  width: 25%;
+}
+
+.mat-row:nth-child(even){
+  background-color:white;
+  }
+
+.mat-row:nth-child(odd){
+  background-color:#f6f6f6;
+  }
+
+  
+.center-spinner {
+  position: fixed;
+  overflow: visible;
+  margin: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}

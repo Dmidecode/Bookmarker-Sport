@@ -1,0 +1,118 @@
+<div class="order-container">
+
+  <mat-form-field class="input-width" style="margin-left: 20px; margin-top: 20px;">
+    <input matInput placeholder="Money to win" value="1000" #money>
+  </mat-form-field>
+  <button mat-button (click)="onReloadResult(money.value)">Apply</button>
+
+  <button mat-icon-button (click)="onReload()">
+    <mat-icon>
+      refresh
+    </mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="dataSource" matSort multiTemplateDataRows *ngIf="reloadTable == regionLength">
+    <ng-container matColumnDef="sport">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Sport
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.sport }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <ng-container matColumnDef="home_team">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Home team
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.home_team }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="visitor_team">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Visitor Team
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.visitor_team }}
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="max_bet_home_display">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bet home team
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <b style="color: green">{{element.amount_bet_home}}</b> on <b
+          style="color: purple">{{element.max_bet_home_site}}</b>&nbsp;<i>({{element.max_bet_home}})</i>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="max_bet_visitor_display">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bet Visitor Team
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <b style="color: green">{{element.amount_bet_visitor}}</b> on <b
+          style="color: purple">{{element.max_bet_visitor_site}}</b>&nbsp;<i>({{element.max_bet_visitor}})</i>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="max_bet_draw_display">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Bet Draw Team
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <i *ngIf="element.amount_bet_draw <= 0; else betDraw">No Bet</i>
+        <ng-template #betDraw>
+          <b style="color: green">{{element.amount_bet_draw}}</b> on <b
+            style="color: purple">{{element.max_bet_draw_site}}</b>&nbsp;<i>({{element.max_bet_draw}})</i>
+        </ng-template>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="total_bet">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Total bet
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <b style="color: purple">{{element.total_bet}}</b>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="earnings">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Earnings
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <b style="color: green">{{element.earnings}}</b>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+    <ng-container matColumnDef="countdown">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Start
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <i [ngStyle]="{'color': checkDateCss(element.countdown)}">
+          {{ element.countdown | date:'dd/MM HH:mm' }}
+        </i>
+      </td>
+      <td mat-footer-cell *matFooterCellDef></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true;"></tr>
+    <tr mat-row *matRowDef="let row; columns:displayedColumns;"></tr>
+
+  </table>
+</div>
+
+<div *ngIf="reloadTable < regionLength">
+    <mat-progress-spinner color="primary" mode="indeterminate" strokeWidth="5" diameter="50"  class="center-spinner">
+    </mat-progress-spinner>
+  </div>
+
+<mat-paginator [length]="data.length" [pageSize]="pageSize" [pageSizeOptions]="pageSizeOptions"
+  (page)="onPageChange($event)"></mat-paginator>
